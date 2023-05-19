@@ -16,7 +16,7 @@ hooks:
       # Ensure the script is in the correct location within the deployment package
       # Modify the source path according to your project's structure
       - source: scripts/install_dependencies.sh
-        destination: /var/www/my-app/scripts/install_dependencies.sh
+        destination: /var/www/simple-typescript-starter/scripts/install_dependencies.sh
   AfterInstall:
     - location: scripts/build_project.sh
       timeout: 300
