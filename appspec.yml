@@ -1,17 +1,23 @@
 version: 0.0
 os: linux
 files:
-  - source: /build/index.html
-    destination: /var/www/html
+  - source: /
+    destination: /var/www/simple-typescript-starter
+permissions:
+  - object: /var/www/simple-typescript-starter
+    pattern: "**"
+    owner: ec2-user
+    group: ec2-user
 hooks:
   BeforeInstall:
-    - location: scripts/install_dependencies
+    - location: scripts/install_dependencies.sh
       timeout: 300
       runas: root
-    - location: scripts/start_server
+  AfterInstall:
+    - location: scripts/build_project.sh
       timeout: 300
       runas: root
-  ApplicationStop:
-    - location: scripts/stop_server
+  ApplicationStart:
+    - location: scripts/start_application.sh
       timeout: 300
-      runas: root
+      runas: node
